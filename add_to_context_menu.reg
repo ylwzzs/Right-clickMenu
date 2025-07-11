@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\shell\移动所有子文件到此处]
+@="移动所有子文件到此处"
+
+[HKEY_CLASSES_ROOT\Directory\shell\移动所有子文件到此处\command]
+@="\"%~dp0move_files.exe\" \"%1\"" 
