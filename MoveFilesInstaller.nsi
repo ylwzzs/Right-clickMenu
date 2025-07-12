@@ -1,59 +1,83 @@
-; å¼ºåˆ¶è¯·æ±‚ç®¡ç†å‘˜æƒé™
+; Ç¿ÖÆÇëÇó¹ÜÀíÔ±È¨ÏŞ
 RequestExecutionLevel admin
 
-; å®‰è£…åŒ…è¾“å‡ºæ–‡ä»¶å
+; °²×°°üÊä³öÎÄ¼şÃû
 OutFile "MoveFilesInstaller.exe"
 
-; é»˜è®¤å®‰è£…è·¯å¾„
-InstallDir "$PROGRAMFILES\MoveFiles"
+; ÉèÖÃ°²×°³ÌĞòÍ¼±ê
+Icon "app_icon.ico"
 
-; å®‰è£…ç•Œé¢
-Page directory
+; ¹Ì¶¨°²×°Â·¾¶£¬²»ÔÊĞíĞŞ¸Ä
+InstallDir "C:\Program Files\MoveFiles"
+
+; °²×°½çÃæ (ÒÆ³ıÁËdirectoryÒ³Ãæ)
 Page instfiles
 UninstPage uninstConfirm
 UninstPage instfiles
 
-Section "å®‰è£… MoveFiles"
-    SetRegView 64
-    SetOutPath "$INSTDIR"
-    File "move_files.exe"
+; ×Ô¶¯¹Ø±Õ°²×°³ÌĞò
+AutoCloseWindow true
 
-    ; ç”Ÿæˆæ·»åŠ å³é”®èœå•çš„regæ–‡ä»¶ï¼ˆANSIç¼–ç ï¼‰
-    FileOpen $0 "$INSTDIR\add_to_context_menu.reg" w
-    IntCmp $0 0 +2
-        MessageBox MB_OK "reg æ–‡ä»¶æ‰“å¼€å¤±è´¥"
+; °²×°³ÌĞò±êÌâºÍÃèÊö
+Name "ÒÆ¶¯ÎÄ¼ş¹¤¾ß"
+Caption "ÒÆ¶¯ÎÄ¼ş¹¤¾ß°²×°³ÌĞò"
+BrandingText "ÒÆ¶¯ÎÄ¼ş¹¤¾ß v1.0"
+
+Section "°²×° MoveFiles"
+    SetRegView 64
+    SetOutPath "C:\Program Files\MoveFiles"
+    File "move_files.exe"
+    File "icon.ico" ; Ìí¼ÓÍ¼±êÎÄ¼ş
+
+    ; Éú³ÉÌí¼ÓÓÒ¼ü²Ëµ¥µÄregÎÄ¼ş£¨ANSI±àÂë£©
+    FileOpen $0 "C:\Program Files\MoveFiles\add_to_context_menu.reg" w
     FileWrite $0 "Windows Registry Editor Version 5.00$\r$\n"
     FileWrite $0 "$\r$\n"
-    FileWrite $0 "[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\ç§»åŠ¨æ‰€æœ‰å­æ–‡ä»¶åˆ°æ­¤å¤„]$\r$\n"
-    FileWrite $0 '@="ç§»åŠ¨æ‰€æœ‰å­æ–‡ä»¶åˆ°æ­¤å¤„"$\r$\n'
+    ; Ê¹ÓÃHKEY_CLASSES_ROOTÂ·¾¶Ö±½ÓÌí¼Ó²Ëµ¥
+    FileWrite $0 "[HKEY_CLASSES_ROOT\Directory\Background\shell\ÒÆ¶¯ËùÓĞ×ÓÎÄ¼şµ½´Ë´¦]$\r$\n"
+    FileWrite $0 '@="ÒÆ¶¯ËùÓĞ×ÓÎÄ¼şµ½´Ë´¦"$\r$\n'
+    FileWrite $0 '"Icon"="C:\\Program Files\\MoveFiles\\icon.ico"$\r$\n'
     FileWrite $0 "$\r$\n"
-    FileWrite $0 "[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\ç§»åŠ¨æ‰€æœ‰å­æ–‡ä»¶åˆ°æ­¤å¤„\command]$\r$\n"
-    FileWrite $0 '@="\"$INSTDIR\\move_files.exe\" \"%1\""$\r$\n'
+    FileWrite $0 "[HKEY_CLASSES_ROOT\Directory\Background\shell\ÒÆ¶¯ËùÓĞ×ÓÎÄ¼şµ½´Ë´¦\command]$\r$\n"
+    FileWrite $0 '@="\"C:\\Program Files\\MoveFiles\\move_files.exe\" \"%V\""$\r$\n'
+    FileWrite $0 "$\r$\n"
+    ; Í¬Ê±Ìí¼Óµ½ÎÄ¼ş¼ĞÓÒ¼ü²Ëµ¥
+    FileWrite $0 "[HKEY_CLASSES_ROOT\Directory\shell\ÒÆ¶¯ËùÓĞ×ÓÎÄ¼şµ½´Ë´¦]$\r$\n"
+    FileWrite $0 '@="ÒÆ¶¯ËùÓĞ×ÓÎÄ¼şµ½´Ë´¦"$\r$\n'
+    FileWrite $0 '"Icon"="C:\\Program Files\\MoveFiles\\icon.ico"$\r$\n'
+    FileWrite $0 "$\r$\n"
+    FileWrite $0 "[HKEY_CLASSES_ROOT\Directory\shell\ÒÆ¶¯ËùÓĞ×ÓÎÄ¼şµ½´Ë´¦\command]$\r$\n"
+    FileWrite $0 '@="\"C:\\Program Files\\MoveFiles\\move_files.exe\" \"%1\""$\r$\n'
     FileClose $0
 
-    ExecWait 'regedit.exe /s "$INSTDIR\add_to_context_menu.reg"'
-    Delete "$INSTDIR\add_to_context_menu.reg"
+    ExecWait 'regedit.exe /s "C:\Program Files\MoveFiles\add_to_context_menu.reg"'
+    Delete "C:\Program Files\MoveFiles\add_to_context_menu.reg"
 
-    WriteUninstaller "$INSTDIR\Uninstall.exe"
+    WriteUninstaller "C:\Program Files\MoveFiles\Uninstall.exe"
+    
+    ; °²×°³É¹¦ÌáÊ¾£¬µã»÷ºóÍË³ö
+    SetDetailsView hide
+    MessageBox MB_OK|MB_ICONINFORMATION "°²×°³É¹¦£¬µã»÷°´Å¥ÍË³ö"
+    Quit
 SectionEnd
 
 Section "Uninstall"
     SetRegView 64
 
-    ; ç”Ÿæˆåˆ é™¤å³é”®èœå•çš„regæ–‡ä»¶ï¼ˆANSIç¼–ç ï¼‰
-    FileOpen $0 "$INSTDIR\remove_context_menu.reg" w
-    IntCmp $0 0 +2
-        MessageBox MB_OK "å¸è½½æ—¶reg æ–‡ä»¶æ‰“å¼€å¤±è´¥"
+    ; Éú³ÉÉ¾³ıÓÒ¼ü²Ëµ¥µÄregÎÄ¼ş£¨ANSI±àÂë£©
+    FileOpen $0 "C:\Program Files\MoveFiles\remove_context_menu.reg" w
     FileWrite $0 "Windows Registry Editor Version 5.00$\r$\n"
     FileWrite $0 "$\r$\n"
-    FileWrite $0 "[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\ç§»åŠ¨æ‰€æœ‰å­æ–‡ä»¶åˆ°æ­¤å¤„]$\r$\n"
+    FileWrite $0 "[-HKEY_CLASSES_ROOT\Directory\Background\shell\ÒÆ¶¯ËùÓĞ×ÓÎÄ¼şµ½´Ë´¦]$\r$\n"
+    FileWrite $0 "[-HKEY_CLASSES_ROOT\Directory\shell\ÒÆ¶¯ËùÓĞ×ÓÎÄ¼şµ½´Ë´¦]$\r$\n"
     FileClose $0
 
-    ExecWait 'regedit.exe /s "$INSTDIR\remove_context_menu.reg"'
-    Delete "$INSTDIR\remove_context_menu.reg"
+    ExecWait 'regedit.exe /s "C:\Program Files\MoveFiles\remove_context_menu.reg"'
+    Delete "C:\Program Files\MoveFiles\remove_context_menu.reg"
 
-    ; æœ€åå†åˆ é™¤ç¨‹åºæ–‡ä»¶å’Œç›®å½•
-    Delete "$INSTDIR\move_files.exe"
-    Delete "$INSTDIR\Uninstall.exe"
-    RMDir "$INSTDIR"
+    ; ×îºóÔÙÉ¾³ı³ÌĞòÎÄ¼şºÍÄ¿Â¼
+    Delete "C:\Program Files\MoveFiles\move_files.exe"
+    Delete "C:\Program Files\MoveFiles\icon.ico"
+    Delete "C:\Program Files\MoveFiles\Uninstall.exe"
+    RMDir "C:\Program Files\MoveFiles"
 SectionEnd

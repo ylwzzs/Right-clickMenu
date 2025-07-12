@@ -1,7 +1,7 @@
 Windows Registry Editor Version 5.00
 
-[HKEY_CLASSES_ROOT\Directory\shell\Г╖╩Е┼╗Ф┴─Ф°┴Е╜░Ф√┤Д╩╤Е┬╟Ф╜╓Е╓└]
-@="Г╖╩Е┼╗Ф┴─Ф°┴Е╜░Ф√┤Д╩╤Е┬╟Ф╜╓Е╓└"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\рф╤╞кЫспвснд╪Ч╣╫╢к╢╕]
+@="рф╤╞кЫспвснд╪Ч╣╫╢к╢╕"
 
-[HKEY_CLASSES_ROOT\Directory\shell\Г╖╩Е┼╗Ф┴─Ф°┴Е╜░Ф√┤Д╩╤Е┬╟Ф╜╓Е╓└\command]
-@="\"%~dp0move_files.exe\" \"%1\"" 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\рф╤╞кЫспвснд╪Ч╣╫╢к╢╕\command]
+@="\"C:\\Program Files (x86)\\MoveFiles\\move_files.exe\" \"%1\""
